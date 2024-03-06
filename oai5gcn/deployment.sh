@@ -64,4 +64,13 @@ git checkout -f v2.0.1
 # 서브 모듈 동기화
 sudo ./scripts/syncComponents.sh --verbose
 
+# Docker-compose를 이용해 core network 자동 구축
+#-------To start the containers
+docker-compose -f docker-compose-basic-nrf.yaml up -d
+#-------To check their health status and wait till the time they are healthy, you ctrl + c to exit watch command
+watch docker-compose -f docker-compose-basic-nrf.yaml ps -a
+#-------To stop the containers with zero graceful period
+#docker-compose -f docker-compose-basic-nrf.yaml down -t 0
 
+# 패킷 캡쳐
+sudo tshark -i demo-oai
